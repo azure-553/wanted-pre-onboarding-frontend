@@ -3,6 +3,7 @@ import {Route,  Routes as Switch} from "react-router-dom";
 import MainPage from '../../pages/MainPage';
 import SignupPage from '../../pages/SignupPage';
 import SigninPage from '../../pages/SigninPage';
+import TodoPage from '../../pages/TodoPage';
 
 const Router = () => {
   return (
@@ -11,7 +12,7 @@ const Router = () => {
             <Route path="/" element={<MainPage/>}/>
             <Route path="/signup" element={<SignupPage/>}/>
             <Route path="/signin" element={<SigninPage/>}/>
-            <Route path='/todo'/>
+            <Route path='/todo' element={<TodoPage/>}/>
         </Switch>
     </>
   )

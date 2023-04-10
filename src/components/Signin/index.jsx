@@ -32,7 +32,7 @@ export const Signin = () => {
         localStorage.setItem('token',token);
         localStorage.setItem('user_data', JSON.stringify(data));
         console.log('로그인에 성공했습니다.',data);
-        navigate("/")
+        navigate("/todo")
       } catch (error) {
         console.log('로그인에 실패했습니다.',error);
       }
