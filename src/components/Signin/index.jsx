@@ -22,13 +22,16 @@ export const Signin = () => {
     setPassword(value);
     setPasswordValid(value.length >= 8);
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (emailValid && passwordlValid) {
       try {
-        const reponse = signin(email, password);
-        console.log('로그인에 성공했습니다.',reponse.data);
+        const {token, data} = await signin(email, password);
+        // console.log(data);
+        localStorage.setItem('token',token);
+        localStorage.setItem('user_data', JSON.stringify(data));
+        console.log('로그인에 성공했습니다.',data);
         navigate("/")
       } catch (error) {
         console.log('로그인에 실패했습니다.',error);
