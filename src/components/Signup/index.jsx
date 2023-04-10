@@ -29,6 +29,7 @@ export const Signup = () => {
       try {
         const response = await signup(email, password);
         console.log('회원가입에 성공하셨습니다.',response.data);
+        // 요구 사항 2번 충족
         navigate("/signin")
       } catch (error) {
         console.log('회원가입에 실패하셨습니다.',error);
