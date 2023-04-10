@@ -26,6 +26,11 @@ const GlobalStyle = createGlobalStyle`
     *{
         color: #373737;
     }
+    button {
+        width: 100px;
+        height: 40px;
+        font-size: 18px;
+    }
 `;
 
 export default GlobalStyle;
