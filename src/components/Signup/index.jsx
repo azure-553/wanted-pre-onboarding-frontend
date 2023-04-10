@@ -32,7 +32,6 @@ export const Signup = () => {
         navigate("/signin")
       } catch (error) {
         console.log('회원가입에 실패하셨습니다.',error);
-        navigate("/")
       }
     }
   };

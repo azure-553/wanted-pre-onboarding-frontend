@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import * as S from "../Signup/style";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import {signin} from "../../api";
 
 export const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [emailValid, setEmailValid] = useState(true);
+  const [emailValid, setEmaiValid] = useState(true);
   const [passwordlValid, setPasswordValid] = useState(true);
+
+  const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     const value = e.target.value;
     setEmail(value);
-    setEmailValid(value.includes("@"));
+    setEmaiValid(value.includes("@"));
   };
 
   const handlePasswordChange = (e) => {
@@ -19,8 +22,18 @@ export const Signin = () => {
     setPassword(value);
     setPasswordValid(value.length >= 8);
   };
-  const handleSubmit = () => {
-    // TODO : 로그인 처리 로직 구현
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (emailValid && passwordlValid) {
+      try {
+        const reponse = signin(email, password);
+        console.log('로그인에 성공했습니다.',reponse.data);
+        navigate("/")
+      } catch (error) {
+        console.log('로그인에 실패했습니다.',error);
+      }
+    }
   };
   return (
     <div>
