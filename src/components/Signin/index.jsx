@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as S from "../Signup/style";
 import { Link, useNavigate } from "react-router-dom";
-import {signin} from "../../api";
+import { signin } from "../../api";
 
 export const Signin = () => {
   const [email, setEmail] = useState("");
@@ -22,16 +22,19 @@ export const Signin = () => {
     setPassword(value);
     setPasswordValid(value.length >= 8);
   };
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (emailValid && passwordlValid) {
       try {
-        const reponse = signin(email, password);
-        console.log('로그인에 성공했습니다.',reponse.data);
-        navigate("/")
+        const { token, data } = await signin(email, password);
+        localStorage.setItem("token", token);
+        localStorage.setItem("user_data", JSON.stringify(data));
+        console.log("로그인에 성공했습니다.", data);
+        navigate("/todo");
       } catch (error) {
-        console.log('로그인에 실패했습니다.',error);
+        console.log("로그인에 실패했습니다.", error);
       }
     }
   };
