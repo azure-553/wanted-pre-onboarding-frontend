@@ -14,6 +14,8 @@ const Router = () => {
 
     if (token && (link === '/signin' || link === '/signup')) {
       navigate('/todo');
+    }  else if(!token && (link === '/todo')) {
+      navigate('/signin')
     }
 
   },[navigate]);
