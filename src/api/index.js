@@ -24,12 +24,13 @@ const todoAxios = axios.create({
   baseURL: "https://www.pre-onboarding-selection-task.shop/todos",
 });
 
-export const creatTodo = async (accessToken, todo) => {
+export const createTodo = async (todo) => {
   try {
+    const access_token = localStorage.getItem("token");
     const response = await todoAxios.post(
       "/",
       { todo },
-      { headers: { Authorization: `Bearer ${accessToken}` } }
+      { headers: { Authorization: `Bearer ${access_token}` } }
     );
     return response.data;
   } catch (error) {
@@ -37,11 +38,12 @@ export const creatTodo = async (accessToken, todo) => {
   }
 };
 
-export const getTodos = async (accessToken) => {
+export const getTodos = async () => {
   try {
+    const access_token = localStorage.getItem("token");
     const response = await todoAxios.get(
       "/",
-      { headers: { Authorization: `Bearer ${accessToken}` } }
+      { headers: { Authorization: `Bearer ${access_token}` } }
     );
     return response.data;
   } catch (error) {
@@ -49,11 +51,13 @@ export const getTodos = async (accessToken) => {
   }
 };
 
-export const updateTodo = async (accessToken,todoId) => {
+export const updateTodo = async (todoId) => {
   try {
+    const access_token = localStorage.getItem("token");
     const response = await todoAxios.put(
       `/${todoId}`,
-      { headers: { Authorization: `Bearer ${accessToken}` } }
+      {},
+      { headers: { Authorization: `Bearer ${access_token}` } }
     );
     return response.data;
   } catch (error) {
@@ -61,11 +65,12 @@ export const updateTodo = async (accessToken,todoId) => {
   }
 }
 
-export const deleteTodo = async (accessToken,todoId) => {
+export const deleteTodo = async (todoId) => {
   try {
+    const access_token = localStorage.getItem("token");
     const response = await todoAxios.delete(
       `/${todoId}`,
-      { headers: { Authorization: `Bearer ${accessToken}` } }
+      { headers: { Authorization: `Bearer ${access_token}` } }
     );
     return response.data;
   } catch (error) {
