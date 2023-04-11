@@ -18,3 +18,58 @@ export const signin = async (email, password) => {
     throw error;
   }
 };
+
+// Todolist API 연결
+const todoAxios = axios.create({
+  baseURL: "https://www.pre-onboarding-selection-task.shop/todos",
+});
+
+export const creatTodo = async (accessToken, todo) => {
+  try {
+    const response = await todoAxios.post(
+      "/",
+      { todo },
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getTodos = async (accessToken) => {
+  try {
+    const response = await todoAxios.get(
+      "/",
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateTodo = async (accessToken,todoId) => {
+  try {
+    const response = await todoAxios.put(
+      `/${todoId}`,
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export const deleteTodo = async (accessToken,todoId) => {
+  try {
+    const response = await todoAxios.delete(
+      `/${todoId}`,
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
