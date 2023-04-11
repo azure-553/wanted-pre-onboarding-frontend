@@ -12,8 +12,7 @@ export const signin = async (email, password) => {
   try {
     const response = await authAxios.post("/signin", { email, password });
     return {
-      token: response.data.token,
-      data: response.data.data,
+      token: response.data.access_token,
     };
   } catch (error) {
     throw error;
