@@ -19,11 +19,13 @@ export const Todo = () => {
     }
   };
 
-  const handleCompelete = async (todoId, isCompelete) => {
+  const handleComplete = async (todoId,todo,isComplete) => {
+    console.log('todoId, isComplete : ',todoId, isComplete);
     try {
-      await updateTodo(todoId, null, isCompelete);
+      await updateTodo(todoId,todo,isComplete);
       const response = await getTodos();
       setTodos(response);
+      console.log('todoId, isComplete : ',todoId, isComplete);
     } catch (error) {
       throw error;
     }
@@ -63,8 +65,8 @@ export const Todo = () => {
           <li key={todo.id}>
             <input
               type="checkbox"
-              checked={todo.isCompelete}
-              onChange={(e) => handleCompelete(todo.id, e.target.checked)}
+              checked={todo.isComplete}
+              onChange={(e) => handleComplete(todo.id,todo.todo,e.target.checked)}
             />
             {todo.todo}
           </li>
