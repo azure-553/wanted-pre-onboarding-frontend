@@ -30,7 +30,12 @@ export const createTodo = async (todo) => {
     const response = await todoAxios.post(
       "/",
       { todo },
-      { headers: { Authorization: `Bearer ${access_token}` } }
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          "Content-Type": "application/json",
+        },
+      }
     );
     return response.data;
   } catch (error) {
@@ -41,9 +46,27 @@ export const createTodo = async (todo) => {
 export const getTodos = async () => {
   try {
     const access_token = localStorage.getItem("token");
-    const response = await todoAxios.get(
-      "/",
-      { headers: { Authorization: `Bearer ${access_token}` } }
+    const response = await todoAxios.get("/", {
+      headers: { Authorization: `Bearer ${access_token}` },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateTodo = async (todoId, todo ,isCompleted) => {
+  try {
+    const access_token = localStorage.getItem("token");
+    const response = await todoAxios.put(
+      `/${todoId}`,
+      {todo: todo,isCompleted: isCompleted },
+      {
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+          "Content-Type": "application/json",
+        },
+      }
     );
     return response.data;
   } catch (error) {
@@ -51,30 +74,14 @@ export const getTodos = async () => {
   }
 };
 
-export const updateTodo = async (todoId) => {
-  try {
-    const access_token = localStorage.getItem("token");
-    const response = await todoAxios.put(
-      `/${todoId}`,
-      {},
-      { headers: { Authorization: `Bearer ${access_token}` } }
-    );
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-}
-
 export const deleteTodo = async (todoId) => {
   try {
     const access_token = localStorage.getItem("token");
-    const response = await todoAxios.delete(
-      `/${todoId}`,
-      { headers: { Authorization: `Bearer ${access_token}` } }
-    );
+    const response = await todoAxios.delete(`/${todoId}`, {
+      headers: { Authorization: `Bearer ${access_token}` },
+    });
     return response.data;
   } catch (error) {
     throw error;
   }
-}
-
+};
