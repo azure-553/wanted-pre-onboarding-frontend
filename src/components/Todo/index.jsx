@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { createTodo, deleteTodo, getTodos, updateTodo } from "../../api";
+import TodoItem from "./TodoItem";
+import { createTodo, getTodos } from "../../api";
 
 export const Todo = () => {
   const [todos, setTodos] = useState([]);
@@ -19,18 +20,6 @@ export const Todo = () => {
     }
   };
 
-  const handleComplete = async (todoId, todo, isComplete) => {
-    console.log("todoId, isComplete : ", todoId, isComplete);
-    try {
-      await updateTodo(todoId, todo, isComplete);
-      const response = await getTodos();
-      setTodos(response);
-      console.log("todoId, isComplete : ", todoId, isComplete);
-    } catch (error) {
-      throw error;
-    }
-  };
-
   const handleTodo = async () => {
     // newTodo에 내용이 없으면 아무것도 return하지 않도록
     if (!newTodo) return;
@@ -43,18 +32,6 @@ export const Todo = () => {
       setNewTodo("");
     } catch (error) {
       console.log("Todo를 추가하지 못했어요 😢", error);
-    }
-  };
-
-  const handleDelete = async (todoid) => {
-    try {
-      console.log(todoid);
-      await deleteTodo(todoid);
-      setTodos((todos) => todos.filter((todo) => todo.id !== todoid));
-      console.log("delete!");
-      return null;
-    } catch (error) {
-      throw error;
     }
   };
 
@@ -74,27 +51,10 @@ export const Todo = () => {
       </div>
       <ul>
         {todos.map((todo) => (
-          <li key={todo.id}>
-            <label>
-              <input
-                type="checkbox"
-                checked={todo.isComplete}
-                onChange={(e) =>
-                  handleComplete(todo.id, todo.todo, e.target.checked)
-                }
-              />
-              {todo.todo}
-            </label>
-            <button data-testid="modify-button">수정</button>
-            <button
-              data-testid="delete-button"
-              onClick={(e) => handleDelete(todo.id)}
-            >
-              삭제
-            </button>
-          </li>
+          <TodoItem key={todo.id} todo={todo} setTodos={setTodos} />
         ))}
       </ul>
     </div>
   );
 };
+
