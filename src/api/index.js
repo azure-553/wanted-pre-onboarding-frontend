@@ -77,10 +77,10 @@ export const updateTodo = async (todoId, todo ,isCompleted) => {
 export const deleteTodo = async (todoId) => {
   try {
     const access_token = localStorage.getItem("token");
-    const response = await todoAxios.delete(`/${todoId}`, {
+    await todoAxios.delete(`/${todoId}`, {
       headers: { Authorization: `Bearer ${access_token}` },
     });
-    return response.data;
+    return null;
   } catch (error) {
     throw error;
   }
