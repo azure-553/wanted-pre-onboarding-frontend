@@ -68,7 +68,7 @@ export const Signin = () => {
           <_.WarnMsg> 8자리 이상 입력하세요.</_.WarnMsg>
         )}
         <_.AuthBtn
-          data-testid="signup-button"
+          data-testid="signin-button"
           disabled={!emailValid || !passwordlValid}
         >
           로그인
