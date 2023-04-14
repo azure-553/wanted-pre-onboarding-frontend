@@ -9,4 +9,4 @@ npm run start
 ```
 
 - 데모 영상(링크)
-    - [여기](https://www.naver.com/)
+    - [여기입니다](https://wanted-pre-onboarding-frontend-git-master-azure-553.vercel.app/)
