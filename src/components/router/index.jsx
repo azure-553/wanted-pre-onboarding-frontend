@@ -4,6 +4,7 @@ import MainPage from '../../pages/MainPage';
 import SignupPage from '../../pages/SignupPage';
 import SigninPage from '../../pages/SigninPage';
 import TodoPage from '../../pages/TodoPage';
+import NotFoundPage from '../../pages/NotFoundPage';
 
 const Router = () => {
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ const Router = () => {
             <Route path="/signup" element={<SignupPage/>}/>
             <Route path="/signin" element={<SigninPage/>}/>
             <Route path='/todo' element={<TodoPage/>}/>
+            <Route path='/*' element={<NotFoundPage/>}/>
         </Switch>
     </>
   )
