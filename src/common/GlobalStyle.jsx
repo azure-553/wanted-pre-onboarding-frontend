@@ -27,9 +27,20 @@ const GlobalStyle = createGlobalStyle`
         color: #373737;
     }
     button {
-        width: 100px;
+        margin: 10px;
+
+        width: 70px;
         height: 40px;
+
         font-size: 18px;
+
+        border: none;
+        border-radius: 12px;
+
+        background-color: pink;
+        color: #333;
+
+        cursor: pointer;
     }
 `;
 

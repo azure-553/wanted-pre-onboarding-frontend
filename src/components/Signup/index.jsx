@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import * as _ from "./style";
+import * as _ from "../../common/AuthStyle";
 import { Link, useNavigate } from "react-router-dom";
 import { signup } from "../../api";
 
@@ -37,7 +37,7 @@ export const Signup = () => {
     }
   };
   return (
-    <div>
+    <_.AuthWrap>
       <_.AuthForm onSubmit={handleSubmit}>
         <h1>회원 가입을 해주세요.</h1>
         <_.AuthInput
@@ -48,12 +48,12 @@ export const Signup = () => {
           placeholder="이메일을 입력해 주세요!"
         />
         {!emailValid ? (
-          <p style={{ color: "red", margin: 0 }}>
+          <_.WarnMsg color="red">
             {" "}
             '@' 를 포함하여 입력하세요.
-          </p>
+          </_.WarnMsg>
         ) : (
-          <p> '@' 를 포함하여 입력하세요.</p>
+          <_.WarnMsg> '@' 를 포함하여 입력하세요.</_.WarnMsg>
         )}
         <_.AuthInput
           type="password"
@@ -63,20 +63,20 @@ export const Signup = () => {
           placeholder="비밀번호를 입력해 주세요!"
         />
         {!passwordValid ? (
-          <p style={{ color: "red", margin: 0 }}> 8자리 이상 입력하세요.</p>
+          <_.WarnMsg color="red"> 8자리 이상 입력하세요.</_.WarnMsg>
         ) : (
-          <p> 8자리 이상 입력하세요.</p>
+          <_.WarnMsg> 8자리 이상 입력하세요.</_.WarnMsg>
         )}
-        <button
+        <_.AuthBtn
           data-testid="signup-button"
           disabled={!emailValid || !passwordValid}
         >
           회원 가입
-        </button>
+        </_.AuthBtn>
         <br />
         <br />
-        이미 가입되어있는가?<Link to="/signin">로그인하러 가기</Link>
+        이미 가입되어있습니까?<Link to="/signin"> 로그인하러 가기</Link>
       </_.AuthForm>
-    </div>
+    </_.AuthWrap>
   );
 };

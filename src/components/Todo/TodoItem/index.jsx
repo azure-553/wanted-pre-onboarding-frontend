@@ -1,8 +1,8 @@
 import React, { useState } from "react";
+import * as _ from "../../../common/TodoStyle";
 import { deleteTodo, getTodos, updateTodo } from "../../../api";
 
 const TodoItem = ({ todo, setTodos }) => {
-//   const [isChecked, setIsChecked] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [modifiedTodo, setModifiedTodo] = useState(todo.todo);
 
@@ -22,7 +22,7 @@ const TodoItem = ({ todo, setTodos }) => {
     setIsEditMode(true);
   };
 
-  const handleSubmit = async (todoId, modifiedTodo, isComplete ) => {
+  const handleSubmit = async (todoId, modifiedTodo, isComplete) => {
     try {
       console.log(todoId, modifiedTodo, isComplete);
       await updateTodo(todoId, modifiedTodo, isComplete);
@@ -52,48 +52,58 @@ const TodoItem = ({ todo, setTodos }) => {
 
   return (
     <>
-      <li key={todo.id}>
-        <input
+      <_.TodoContentWrap key={todo.id}>
+        <_.Checkbox
           type="checkbox"
           checked={todo.isComplete}
           onChange={(e) => handleComplete(todo.id, todo.todo, e.target.checked)}
         />
         {isEditMode ? (
           <>
-            <label>
+            <div>
               {" "}
-              <input
+              <_.TodoEditInput
                 type="text"
                 value={modifiedTodo}
                 data-testid="modify-input"
                 onChange={(e) => setModifiedTodo(e.target.value)}
               />
-            </label>
-            <button
-              data-testid="submit-button"
-              onClick={(e) => handleSubmit(todo.id, modifiedTodo, true)}
-            >
-              제출
-            </button>
-            <button data-testid="cancel-button" onClick={() => handleCancel()}>
-              취소
-            </button>
+            </div>
+            <_.TodoBtnWrap>
+              <button
+                data-testid="submit-button"
+                onClick={(e) => handleSubmit(todo.id, modifiedTodo, true)}
+              >
+                제출
+              </button>
+              <button
+                data-testid="cancel-button"
+                onClick={() => handleCancel()}
+              >
+                취소
+              </button>
+            </_.TodoBtnWrap>
           </>
         ) : (
           <>
-            <label>{todo.todo}</label>
-            <button data-testid="modify-button" onClick={() => handleModify()}>
-              수정
-            </button>
-            <button
-              data-testid="delete-button"
-              onClick={(e) => handleDelete(todo.id)}
-            >
-              삭제
-            </button>
+            <_.TodoContent>{todo.todo}</_.TodoContent>
+            <_.TodoBtnWrap>
+              <button
+                data-testid="modify-button"
+                onClick={() => handleModify()}
+              >
+                수정
+              </button>
+              <button
+                data-testid="delete-button"
+                onClick={(e) => handleDelete(todo.id)}
+              >
+                삭제
+              </button>
+            </_.TodoBtnWrap>
           </>
         )}
-      </li>
+      </_.TodoContentWrap>
     </>
   );
 };

@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import * as A from "../../common/AuthStyle";
+import * as _ from "../../common/TodoStyle"
 import TodoItem from "./TodoItem";
 import { createTodo, getTodos } from "../../api";
 
@@ -36,10 +38,10 @@ export const Todo = () => {
   };
 
   return (
-    <div>
+    <A.AuthWrap>
       <h1>TODO</h1>
       <div>
-        <input
+        <_.TodoCreateInput
           type="text"
           placeholder="오늘 해야할 일을 입력해주세요!"
           onChange={(e) => setNewTodo(e.target.value)}
@@ -49,12 +51,12 @@ export const Todo = () => {
           추가
         </button>
       </div>
-      <ul>
+      <ul style={{padding: "0"}}>
         {todos.map((todo) => (
           <TodoItem key={todo.id} todo={todo} setTodos={setTodos} />
         ))}
       </ul>
-    </div>
+    </A.AuthWrap>
   );
 };
 

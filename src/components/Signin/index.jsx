@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import * as S from "../Signup/style";
+import * as _ from "../../common/AuthStyle";
 import { Link, useNavigate } from "react-router-dom";
 import { signin } from "../../api";
 
@@ -37,10 +37,10 @@ export const Signin = () => {
     }
   };
   return (
-    <div>
-      <S.AuthForm onSubmit={handleSubmit}>
+    <_.AuthWrap>
+      <_.AuthForm onSubmit={handleSubmit}>
         <h1>로그인을 해주세요.</h1>
-        <S.AuthInput
+        <_.AuthInput
           type="email"
           value={email}
           data-testid="email-input"
@@ -48,14 +48,14 @@ export const Signin = () => {
           placeholder="이메일을 입력해 주세요!"
         />
         {!emailValid ? (
-          <p style={{ color: "red", margin: 0 }}>
+          <_.WarnMsg color="red">
             {" "}
             '@' 를 포함하여 입력하세요.
-          </p>
+          </_.WarnMsg>
         ) : (
-          <p> '@' 를 포함하여 입력하세요.</p>
+          <_.WarnMsg> '@' 를 포함하여 입력하세요.</_.WarnMsg>
         )}
-        <S.AuthInput
+        <_.AuthInput
           type="password"
           value={password}
           data-testid="password-input"
@@ -63,20 +63,20 @@ export const Signin = () => {
           placeholder="비밀번호를 입력해 주세요!"
         />
         {!passwordlValid ? (
-          <p style={{ color: "red", margin: 0 }}> 8자리 이상 입력하세요.</p>
+          <_.WarnMsg color="red"> 8자리 이상 입력하세요.</_.WarnMsg>
         ) : (
-          <p> 8자리 이상 입력하세요.</p>
+          <_.WarnMsg> 8자리 이상 입력하세요.</_.WarnMsg>
         )}
-        <button
+        <_.AuthBtn
           data-testid="signup-button"
           disabled={!emailValid || !passwordlValid}
         >
           로그인
-        </button>
+        </_.AuthBtn>
         <br />
         <br />
-        아직 회원이 아닌가?<Link to="/signup">회원가입하러 가기</Link>
-      </S.AuthForm>
-    </div>
+        아직 회원이 아니십니까?<Link to="/signup"> 회원가입하러 가기</Link>
+      </_.AuthForm>
+    </_.AuthWrap>
   );
 };
